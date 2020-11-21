@@ -1,0 +1,174 @@
+{% load static %}
+<!doctype html>
+<html lang="es">
+   <head>
+      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+      <!-- Required meta tags -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+      <link rel="stylesheet" type="text/css" href="{% static 'css/estilos.css'%}">
+      <title>Usuarios || Cebollitas Gaming</title>
+      <link rel="icon" type="image/png" href="{% static 'img/icono.ico'%}">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script src="{% static 'js/Cookies.js'%}"></script>
+   </head>
+   <body>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="nav1">
+         <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'img/logo_v2.png'%}" alt=""></a>
+         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+         <span class="navbar-toggler-icon"></span>
+         </button>
+         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="mr-auto">
+            </div>
+            <ul class="navbar-nav">
+               <li class="nav-item dropdown">
+                  <a id="icono_us" class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <img src="{% static 'img/icono_usuario.png'%}" alt="">
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                     {% if user.is_authenticated %}
+                        <a class="dropdown-item" href="{% url 'accounts:logout' %}">cerrar sesión</a>
+                        {% if request.user.is_superuser %}
+                        <a class="dropdown-item admin-text" href="{% url 'admin:index' %}">Admin</a>
+                        <a class="dropdown-item admin-text" href="{% url 'noticias:add' %}">Agregar Noticia</a>
+                        {% endif %}
+                    {% else %}
+                        <a class="dropdown-item" href="{% url 'accounts:login' %}">Iniciar sesión</a>
+                        <a class="dropdown-item" href="{% url 'accounts:signup' %}">Crear cuenta</a>
+                    {% endif %}
+                  </div>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link doraditoHover" href="{% url 'equipo:index' %}">Equipo</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link doraditoHover" href="{% url 'nosotros:index' %}">Nosotros</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link doraditoHover" href="{% url 'noticias:index' %}">Noticias</a>
+               </li>
+            </ul>
+         </div>
+      </nav>
+      <div class="fondo_rojo form_addnoticia">
+         <div class="container pintar_form borde_registro margen_cero">
+            <form action="{% url 'noticias:edit' _noticia_id=form.noticia_id.value %}" method="POST" enctype="multipart/form-data">
+               <div class="iniciocolor">
+                  <h5 class="card-title centrar">Editar Noticia</h5>
+               </div>
+               <div id="form_addn" class="form_addnoticia">
+                  {% csrf_token %}
+                  {{ form.noticia_id.label}}
+                  {{ form.noticia_id}}
+                  {{ form.contenido.label}}
+                  {{ form.contenido}}
+                  {{ form.titulo.label}}
+                  {{ form.titulo}}
+               </div>
+               <input type="submit" name="action" value="Guardar"
+                class="btn btn-success iniciocolor btn_addnoticia "/>
+               <input type="submit" name="action" value="Borrar" class="btn btn-danger  iniciocolor btn_addnoticia "/>
+            </form>
+            {% if form.errors %}
+               {% for field in form %}
+                  {% for error in field.errors %}
+                     <div class="alert alert-danger alert-dismissible fade show">
+                        <strong>{{ error|escape }}</strong>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                           <span aria-hidden="true">&times;</span>
+                        </button>
+                     </div>
+                  {% endfor %}
+               {% endfor %}
+               {% for error in form.non_field_errors %}
+                  <div class="alert alert-danger alert-dismissible fade show">
+                     <strong>{{ error|escape }}</strong>
+                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                     </button>
+                  </div>
+               {% endfor %}
+            {% endif %}
+         </div>
+      </div>
+      <div id=patrocinador>
+         <div class="container">
+            <h3 class="text-center doradito">Patrocinadores</h3>
+            <div class="row cp">
+               <div class="col-md-3 col-sm-6">
+                  <a href="https://www.nvidia.com/es-es" target="_blank"><img class="" alt="Nvidia" src="{% static 'img/nvidia.png'%}" id="logo-nvidia">
+                  </a>
+               </div>
+               <div class="col-md-3 col-sm-6">
+                  <a href="https://www.monsterenergy.com/" target="_blank"><img class="" alt="Monster Energy" src="{% static 'img/monster_logo.png'%}" id="logo-monster">
+                  </a>
+               </div>
+               <div class="col-md-3 col-sm-6">
+                  <a href="https://www.hyperxgaming.com/latam" target="_blank"><img class="" alt="HyperX" src="{% static 'img/hyperx.png'%}" id="logo-hyperx">
+                  </a>
+               </div>
+               <div class="col-md-3 col-sm-6">
+                  <a href="https://www.amd.com/es" target="_blank"><img class="" alt="AMD" src="{% static 'img/amd.png'%}" id="logo-amd">
+                  </a>
+               </div>
+            </div>
+         </div>
+      </div>
+      <footer class="footer mt-auto py-3 bg-dark">
+         <div class="container" id=foter>
+            <h4 class="text-center blanco">Contacto</h4>
+            <div class="row blanco">
+               <div class="col-md-4 col-sm-8">
+                  <h5>Correo</h5>
+                  <p>contacto@cebollitas.com</p>
+               </div>
+               <div class="col-md-4 col-sm-8">
+                  <h5>Telefono</h5>
+                  <p>+56967535733</p>
+               </div>
+               <div class="col-md-4 col-sm-8">
+                  <h5>Direccion</h5>
+                  <iframe
+                     width="300"
+                     height="225"
+                     style="border:0"
+                     src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDxSzLhAQm8sQDTC5gNJV3Zn20WViJLX-0
+                     &q=Av.+Apoquindo+5550,+Las+Condes,+Región+Metropolitana" allowfullscreen>
+                  </iframe>
+               </div>
+            </div>
+         </div>
+         <div class="container" id="redes">
+            <div class="row blanco justify-content-between">
+               <div class="col-md-4 col-sm-8">
+                  <img src="{% static 'img/logo_v2.png'%}" alt="Cebollitas">
+               </div>
+               <div class="col-md-4 col-sm-8">
+                  <span id=copy>© 2004 - 2020, Cebollitas Ltda, All rights reserved.</span>
+               </div>
+               <div class="mr-auto">
+               </div>
+               <div class="col-md-4 col-sm-8">
+                  <a class="" href="https://www.youtube.com/channel/UCLRP9QMkvo487c6g_2VNlLg" target="_blank"><img class="" alt="Youtube" src="{% static 'img/youtube.png'%}"  id="logo-yt">
+                  </a>
+                  <a href="https://www.twitch.tv/mrmeme_cg" target="_blank"><img class="" alt="Twitch" src="{% static 'img/515px-Twitch_Glitch_Logo_Black.png'%}"  id="logo-tw">
+                  </a>
+                  <a href="https://www.instagram.com/cebollitas_gaming/" target="_blank"><img class="" alt="Instagram" src="{% static 'img/insta.png'%}"  id="logo-insta">
+                  </a>
+                  <a href="https://www.facebook.com/" target="_blank"><img class="" alt="Facebook" src="{% static 'img/facebook.png'%}"  id="logo-face">
+                  </a>
+               </div>
+            </div>
+         </div>
+      </footer>
+      <!-- Optional JavaScript -->
+      <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.2/dist/jquery.validate.min.js"></script>
+   </body>
+</html>
