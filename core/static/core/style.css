@@ -1,0 +1,315 @@
+/* css font */
+@font-face{
+    font-family:letraau;
+    src: url(fuentes/Aliens\ Among\ Us.otf)
+}
+@font-face{
+    font-family: letraau2;
+    src: url(fuentes/letra2.TTF)
+}
+h2{
+   font-family:letraau;
+}
+
+p{
+    font-family:letraau2;
+ }
+
+
+/*css body */
+body{
+    background-color: black;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    background: rgb(0,0,0);
+    background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 30%, rgba(111,111,111,1) 100%);
+}
+.abo {
+    padding-top: 7rem;
+    text-align: center;
+    color: grey;
+}
+
+.tripulante {
+    padding-top: 7rem;
+    text-align: center;
+    color: grey;
+}
+
+.impostor {
+    padding-top: 7rem;
+    text-align: center;
+    color: grey;
+}
+
+.link {
+    padding: 7rem;
+    text-align: center;
+    color: grey;
+}
+
+.redes {
+    padding: 7rem 0 7rem 0;
+    text-align: center;
+    color: grey;
+}
+
+.container {
+    position: relative;
+    margin-top: 100px;
+}
+
+nav {
+    position: fixed;
+    z-index: 10;
+    left: 0;
+    right: 0;
+    top: 0;
+    font-family: 'Open Sans Condensed', sans-serif;
+    padding: 0 5%;
+    height: 100px;
+    background-color: teal;
+
+}
+
+.container img {
+    display: block;
+    width: 100%;
+}
+
+
+
+nav .logo {
+      float: left;
+      width: 40%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      font-size: 24px;
+      color: #FFF;
+}
+
+nav .links {
+    float: right;
+    padding: 0;
+    margin: 0;
+    width: 60%;
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+nav .links li {
+    list-style: none;
+}
+
+nav .links a {
+    display: block;
+    padding: 1em;
+    font-size: 15px;
+    font-weight: bold;
+    color: #FFF;
+    text-decoration: none;
+
+}
+
+#nav-toggle {
+    position: absolute;
+    top: -100px;
+}
+
+nav .icon-burger {
+    display: none;
+    position: absolute;
+    right: 5%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+nav .icon-burger .line {
+    width: 30px;
+    height: 5px;
+    background-color: #FFF;
+    margin: 5px;
+    border-radius: 3px;
+}
+
+@media screen and (max-width: 768px){
+    nav .logo {
+        float: none;
+        width: auto;
+        justify-content: center;
+    }
+
+    nav .links {
+        float: none;
+        position: fixed;
+        z-index: 9;
+        left: 0;
+        right: 0;
+        top: 100px;
+        bottom: 100%;
+        width: auto;
+        height: auto;
+        flex-direction: column;
+        justify-content: space-evenly;
+        background-color: rgba(0, 0, 0,.8);
+        overflow: hidden;
+        box-sizing: border-box;
+        transition: all .5s ease-in-out;
+    }
+
+    nav .links a {
+        font-size: 20px;
+    }
+
+    nav :checked ~ .links {
+        bottom: 0;
+    }
+    
+    nav .icon-burger {
+        display: block;
+    }
+
+    nav :checked ~ .icon-burger .line:nth-child(1) {
+        transform: translateY(10px) rotate(225deg);
+    }
+
+    nav :checked ~ .icon-burger .line:nth-child(3) {
+        transform: translateY(-10px) rotate(-225deg);
+    }
+
+    nav :checked ~ .icon-burger .line:nth-child(2) {
+        opacity: 0;
+
+    }
+
+}
+
+*{
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+.carousel-container {
+    width: 70%;
+    margin: auto;
+    border: 1px solid white;    
+    overflow: hidden;
+    position: relative;
+}
+
+.carousel-slide {
+    display: flex;
+    width: 100%;
+    height: 700px;
+}
+
+#prevBtn{
+    position: absolute;
+    top: 50%;
+    z-index: 10;
+    left: 5%;
+    font-size: 30px;
+    color: white;
+    cursor: pointer;
+
+}
+
+#nextBtn{
+    position: absolute;
+    top: 50%;
+    z-index: 10;
+    right: 5%;
+    font-size: 30px;
+    color: white;
+    cursor: pointer;
+
+}
+
+.col-12{
+    text-align: center;
+    padding-top: 20px;
+    color: grey;
+}
+
+
+
+
+/*css social bar*/
+
+.social-bar{
+    position: fixed;
+    right: 0;
+    top: 11%;
+    font-size: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    z-index: 100;
+}
+
+.icon{
+    color: white;
+    text-decoration: none;
+    padding: .7rem;
+    display: flex;
+    transition: all .5s;
+}
+
+.icon-facebook2 {
+    background: #2E406E;
+}
+
+.icon-twitter{
+    background: #339dc5;
+
+}
+
+.icon-instagram{
+    background: #9e0404;
+}
+
+.icon-pacman{
+    background: rgb(245, 202, 10);
+}
+
+.icon-discord{
+    background: #046077;
+}
+
+.icon:first-child {
+    border-radius:  1rem 0 0 0;
+}
+
+.icon:last-child {
+    border-radius: 0 0 0 1rem;
+}
+
+.icon:hover {
+    padding-right: 3rem;
+    border-radius: 1rem 0 0 1rem;
+    box-shadow: 0 0 .5rem rgb(0, 0, 0, 0.42);
+}
+/* css video*/
+.fm-video .vjs-control-bar {
+	background: #F4F4F4;
+	color: #2d5f85;
+}
+
+.fm-video .vjs-play-progress,
+.fm-video .vjs-volume-level {
+	background: #1d87d8;
+}
+
+.footer {
+    margin-top: 3%;
+    padding: 1%;
+    background-color: grey;
+    text-align: left;
+    font-size: 1.1rem;
+    color: white;
+}

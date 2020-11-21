@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous"> 
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">  
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@300&display=swap" rel="stylesheet">
+  
+  {% load static %}
+  {% block css %}
+  <link rel="shortcut icon" type="image/x-icon" href="{% static 'core/img/icon.png' %}">
+  <link href="{% static 'core/style.css' %}" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'core/font.css' %}">
+  {% endblock %}
+
+<!-- video js-->
+
+  <link href="https://vjs.zencdn.net/7.8.2/video-js.min.css" rel="stylesheet">
+  <script src="https://vjs.zencdn.net/7.8.2/video.min.js"></script>
+
+
+  <link rel="stylesheet" href="{% static 'core/css/video-js.css' %}">
+  <script src="js/video.js"></script>
+
+  <!-- Titulo -->
+
+  <title>Among Us :: THE GAME</title>
+
+
+  <!--BOTON SCROLL UP-->
+  <style>
+  #btnScrollToTop {
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: teal;
+    box-shadow: 0 0 10px rgba(0, 0, 0,.25);
+    color: #fff;
+    outline: none;
+    cursor: pointer;
+    border: none;
+  }
+  #btnScrollToTop:active{
+    background: darkcyan;
+  }
+  </style>
+
+
+<!--BARRA DE NAVEGACION-->
+</head>
+<body>
+  <nav>
+    <input id="nav-toggle" type="checkbox">
+      <div class="logo">AMONG<strong>US</strong></div>
+        <ul class="links">
+          <li><a href="#queesamongus">¿Qué es Among us?</a></li>
+          <li><a href="#comojugart">¿Como jugar como tripulante?</a></li>
+          <li><a href="#comojugari">¿Como jugar como impostor?</a></li>
+          <li><a href="#descarga">Descarga el Juego</a></li>
+          <li><a href="#trailer">Trailer del juego</a></li>
+        </ul>
+        <label for="nav-toggle" class="icon-burger">
+          <div class="line"></div>
+          <div class="line"></div>
+          <div class="line"></div>
+        </label>
+    </nav>
+
+    <div class="carousel-container">
+      <i class="fas fa-arrow-left" id="prevBtn"></i>
+      <i class="fas fa-arrow-right" id="nextBtn"></i>
+      <div class="carousel-slide">
+        <img src="{% static 'core/img/carousel/photo6.jpg' %}" id="lastClone" alt="">
+        <img src="{% static 'core/img/carousel/photo1.jpg' %}" alt="">
+        <img src="{% static 'core/img/carousel/photo2.jpg' %}" alt="">
+        <img src="{% static 'core/img/carousel/photo3.jpg' %}" alt="">
+        <img src="{% static 'core/img/carousel/photo4.jpg' %}" alt="">
+        <img src="{% static 'core/img/carousel/photo5.jpg' %}" alt="">
+        <img src="{% static 'core/img/carousel/photo6.jpg' %}" alt="">
+        <img src="{% static 'core/img/carousel/photo1.jpg' %}" id="firstClone" alt="">
+      </div>
+    </div>
+  
+  
+  <!--CONTENIDO BODY // INFORMACION SOBRE EL JUEGO-->
+  <section class="content abo" id="queesamongus">
+    <h2 class="title">Que es Among Us?</h2>
+    <p>Among Us es un juego multijugador de la compañia "Innersloth". Esta disponible en android, ios y pc, por que hay muchas opciones para porder jugar.
+    <br>En el juego estaremos junto a un maximo de otras 10 personas en el que debemos sobrevivir en una nave, realizando tareas para repararla. O bien, ser uno o uno de los impostores
+    <br>que tratara de asesinar a todos los demas, sin que nadie percate su identidad. Sigue leyendo esta entretenida pagina web para descubrir mas a fondo como jugar!</p>
+  </section>
+    
+  <section class="content tripulante" id="comojugart">
+    <h2 class="title">Como jugar como tripulante?</h2>
+      <p> Como tripulante debemos cumplir una serie de tareas, las cuales estas esparcidas por toda la nave en la que nos encontraremos.
+      <br>Debemos ir resolviendolas una a una antes de que el impostor mate a toda la tripulacion. Si toda la tripulacion logra resolver
+      <br>todas sus tareas, los tripulantes ganan!</p>
+      <p>Mientras el juego transcurre y vamos resolviendo las misiones, encontraremos pistas del impostor, tales como cuerpos sin vida
+      <br>como tambien actitudes sospechosas de los otros integrantes de la nave. En caso de encontrar un cadaver, podras reportarlo
+      <br>y dar una explicacion de como lo encontrase </p>
+  </section>
+
+  <section class="content impostor" id="comojugari">
+    <h2 class="title">Como jugar como impostor?</h2>
+    <p>Se dice que esta es la parte que mas se disfruta del juego, ya que debes ir actuando por la nave como un tripulante comun y corriente,
+    <br>con la diferencia de que esta vez deberas ir matando a los otros integrantes de la nave sin que nadie se de cuenta.</p>
+    <p>Debes evitar que los demas vean que eres tu el asesino, evitando a toda costa que alguien te vea cerca de un muerto
+    <br> o noten alguna actitud sospechosa.</p>       
+  </section>
+
+
+  <!--LINKS HACIA OTRAS PAGINAS WEB-->
+  <section class="content link" id="descarga">
+    <h2 class= "title">Descargar el juego</h2>
+    <p>Tienes varias plataformas donde poder descargarlo.</p>
+    <a href="https://store.steampowered.com/app/945360/Among_Us/" target="_blank">Descargar para PC (steam)</a>
+    <div class=""></div>
+    <a href="https://play.google.com/store/apps/details?id=com.innersloth.spacemafia&hl=es" target="_blank">Descargar para Android </a>
+    <div class=""></div>
+    <a href="https://apps.apple.com/es/app/among-us/id1351168404" target="_blank">Descargar para IOS </a>
+    <div class=""></div>      
+    </section>
+
+    <!-- Video-->
+  <section class="content link" id="trailer">
+    <h2 class= "title">Trailer del juego</h2>
+    <main>
+      <div class="contenedor">
+			  <video class="fm-video video-js vjs-16-9 vjs-big-play-centered" data-setup="{}" controls id="fm-video">
+				  <source src="{% static 'core/video/amongus.mp4' %}" type="video/mp4">
+			  </video>
+		  </div>
+
+
+
+
+
+    <!--FORMULARIO INFORMACION-->
+  <div class="contacto col-12">
+    <h3>¿Quieres más informacion a tu correo?</h3>
+      <form method="POST" class="post-form">
+        {% csrf_token %}
+        <div class="form-row">
+          <div class="form-group col-md-12">
+            <label for="correo">Correo electrónico:</label>
+            <input type="email" class="form-control" id="correo">
+          </div>
+          <div class="form-group col-md-12">
+            <label for="nombre">Nombre:</label>
+            <input type="text" class="form-control" id="nombre">
+          </div>
+          <div class="form-group col-md-12">
+            <label for="nick">Nickname:</label>
+            <input type="text" class="form-control" id="nickname">
+          </div>
+          <div class="form-group col-md-12">
+            <label for="telefono">Teléfono de contacto:</label>
+            <input type="number" class="form-control" id="telefono">
+          </div>
+          <div class="form-group col-md-12">
+            <label for="vivienda">Tipo de información requerida:</label>
+              <select class="form-control" id="info">
+                <option value="ayudar-creador">¿Como ayudar a los creadores?</option>
+                <option value="contact-dev">Quiero contactarme con el desarrollador de la pagína</option>
+              </select>
+          </div>
+          <button type="submit" class="btn btn-primary btn btn-success" id="sendBtn">Enviar tus datos
+          </button>
+        </div>
+        </form>
+    </div>
+
+  
+  
+    <!--BOTON SALTAR ARRIBA-->
+  <button id="btnScrollToTop">
+    <i class="fas fa-arrow-circle-up"></i>
+  </button>
+
+  
+
+
+  <footer class="footer">
+  Desarrollo Web y Mobile - DUOC UC - Que yo no soy el Impostor 2020
+  </footer>
+
+
+  {% load static %}
+  {% block javascript %}
+  <script src="{% static 'core/app.js' %}"></script>
+  {% endblock %}
+  
+  
+  
+  <script>
+    var reproductor = videojs('fm-video', {
+
+    });
+  </script>
+
+  <!-- Social Bar-->
+
+  <div class="social-bar">
+    <a href="https://www.facebook.com/InnerSloth/" class="icon icon-facebook2" target="_blank"></a>
+    <a href="https://twitter.com/InnerslothDevs" class="icon icon-twitter" target="_blank"></a>
+    <a href="https://www.instagram.com/darth.vento/?igshid=166xlpzxm1l37" class="icon icon-instagram" target="_blank"></a>
+    <a href="https://innersloth.newgrounds.com/" class="icon icon-pacman" target="_blank"></a>
+    <a href="http://discord.gg/innersloth" class="icon icon-discord" target="_blank"></a>
+  </div>
+  
+
+
+
+ 
+</body>
+</html>
