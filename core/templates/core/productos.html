@@ -1,0 +1,377 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DaleTuCortech | Productos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="icon" href="{% static 'img/icono.ico' %}">
+    <link rel="stylesheet" href="{% static 'css/productos.css' %}">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css"/>
+    <link rel="stylesheet" href="{% static 'css/sweetalert2.min.css' %}">  
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}"> 
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+</head>
+<body data-spy="scroll" data-target="#navbar-boti">
+    <nav class="navbar lista navbar-expand-md fixed-top ">
+        <a href="{% url 'index' %}" class="navbar-brand"><img src="{% static 'img/Negro_y_Rosa_Neon_Club_Logotipo.png' %}" style="width: 182px; height: 30px;" class="logo" alt=""></a>
+        <button class="navbar-toggler navbar-dark" data-toggle="collapse" data-target="#fm-menu" aria-controls="fm-menu" aria-expanded="false" aria-label="Menu">
+            <span class="navbar-toggler-icon"></span> 
+        </button>
+
+        <div class="collapse navbar-collapse " id="fm-menu">
+            <ul class=" navbar-nav ml-auto ">
+                <li class="nav-item ">
+                    <a href="{% url 'index' %}" class="nav-link">
+                        <i class="fas fa-home mr-2"></i>Inicio
+                        
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a href="{% url 'productos' %}" class="nav-link disabled">
+                        <i class="fas fa-store mr-2"></i>Productos
+                    </a>
+                </li>
+                </li>
+                {% if user.is_authenticated %}
+                    {% if perms.core.add_producto %}
+                    <li class="nav-item ">
+                        <a href="{% url 'inicioAdmin' %}" class="nav-link "><i class="fas fa-user-circle mr-1"></i>{{ user.username }}</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item ">
+                        <a href="#" class="nav-link "><i class="fas fa-user-circle mr-1"></i>{{ user.username }}</a>
+                    </li>
+                    {% endif %}
+                <li class="nav-item ">
+                    <a href="{% url 'logout' %}" class="nav-link ">
+                        <i class="fas fa-door-open mr-2"></i>Cerrar Sesión
+                    </a>
+                </li>
+                {% else %}
+                <li class="nav-item ">
+                    <a href="{% url 'login' %}" class="nav-link ">
+                        <i class="fas fa-user mr-2"></i>Iniciar Sesión
+                    </a>
+                </li>
+                {% endif %}
+                
+            </ul>
+        </div>
+    </nav>
+    <div id="navbar-boti" class="segundoNav ">
+        <ul class="navbar-botilleria nav fixed-bottom justify-content-center ">
+            <li class="nav-item">
+                <a class="nav-link" href="#Celulares"><i class="fas fa-mobile-alt mr-2"></i><span>Celulares</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#Notebooks"><i class="fas fa-laptop mr-2"></i><span>Notebooks</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#Tablets"><i class="fas fa-tablet-alt mr-2"></i><span>Tablets</span></a>
+                
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#Televisores"><i class="fas fa-tv mr-2"></i><span>Televisores</span></a>           
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#Consolas"><i class="fas fa-gamepad mr-2"></i><span>Consolas</span></a>
+            </li>
+        </ul>
+    </div>
+
+    <main class="bg-primary-theme">
+
+        <section class="sliderPromos mt-5">
+            <div class="bg-transparent-dark">
+                <h4 class="mt-5 seccion text-center">Promociones</h4>
+                <div class="wrapper">
+                    <div class="carouselItem owl-carousel">
+                        {% for j in PromocionesProductos %}
+                        <div class="cardSlider mb-2">
+                            <div class="imgBox">
+                                {% if j.imagen %}
+                                <img src="{{ j.imagen.url }}" class="img-fluid" alt="{{ j.nombre }}">
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                        <!-- <div class="cardSlider">
+                            <div class="imgBox">
+                                <img src="{% static 'core/img/Celulares/iphone.png' %}" class="img-fluid" alt="iphone nuevo stock">
+                            </div>
+                        </div> -->
+
+                        <!-- <div class="cardSlider">
+                            <div class="imgBox">
+                                <img src="{% static 'core/img/Consolas/juegosfera.png' %}" class="img-fluid" alt="juegosfera nuevo stock">
+                            </div>
+                        </div>
+
+                        <div class="cardSlider">
+                            <div class="imgBox ">
+                                <img src="{% static 'core/img/Tablets/IpadPro12.9.png' %}" class="img-fluid" alt="ipad nuevo stock">
+                            </div>
+                        </div>
+
+                        <div class="cardSlider">
+                            <div class="imgBox">
+                                <img src="{% static 'core/img/Celulares/butterfly.png' %}" class="img-fluid" alt="celular nuevo stock">
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </section> 
+
+        <section  class="bg-transparent-dark">
+            <div id="lista-productos" class="container-fluid contitem p-5 mt-5">
+            
+                <h4 id="Celulares" class="mt-3 seccion text-center ">Celulares</h4>
+                <div class="row ">
+                    <div class="col columna d-flex flex-wrap ">
+                        {% for p in Productos %}                      
+                            {% if p.categoria.nombre == "Celulares" %}
+                            <div class="card mx-auto my-3 text-white " data-aos="fade-right">
+                                <div class="row contenido contenido ">
+                                    <div class="col-12 col-sm-5 d-flex align-items-center">
+                                        <div class="imgBx ">
+                                            {% if p.imagen %}
+                                            <img src="{{ p.imagen.url }}" class="card-img-top pl-3" alt="producto celular" >
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-7">
+                                        <h2 class="card-title pt-4 mb-5 ">{{p.nombre}}</h2>
+                                        <div class="card-body text-center">
+                                            <ul class="detalles ">
+                                                <li> {{ p.caracteristica_1}}</li>
+                                                <li> {{ p.caracteristica_2}}</li>
+                                                <li> {{ p.caracteristica_3}}</li>
+                                                <li> {{ p.caracteristica_4}}</li>
+                                                <li> {{ p.caracteristica_5}}</li>
+                                                <li>Stock: {{ p.stock }}</li>
+                                            </ul>                            
+                                        </div>
+                                        <h4 class="card-title pricing-card-title precio mt-3" >$ <span>{{ p.precio }}</span></h4>
+                                        <a href="" class="btn agregar-carrito mb-3" data-id="{{ p.id }}"><i class="fas fa-shopping-cart mr-2"></i>Comprar</a>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <h4 id="Notebooks" class="mt-5 seccion text-center ">Notebooks</h4>
+                <div class="row ">
+                    <div class="col columna d-flex flex-wrap ">
+                        {% for p in Productos %}                      
+                            {% if p.categoria.nombre == "Notebooks" %}
+                            <div class="card mx-auto my-3 text-white" data-aos="fade-right">
+                                <div class="row contenido">
+                                    <div class="col-12 col-sm-5 d-flex align-items-center">
+                                        <div class="imgBx ">
+                                            {% if p.imagen %}
+                                            <img src="{{ p.imagen.url }}" class="card-img-top " alt="laptop producto" >
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-7">
+                                        <h2 class="card-title pt-4 mb-5 ">{{ p.nombre }}</h2>
+                                        <div class="card-body text-center">
+                                            <ul class="detalles ">
+                                                <li>{{ p.caracteristica_1 }}</li>
+                                                <li> {{ p.caracteristica_2 }}</li>
+                                                <li> {{ p.caracteristica_3 }}</li>
+                                                <li> {{ p.caracteristica_4 }}</li>
+                                                <li> {{ p.caracteristica_5 }}</li>
+                                                <li>Stock: {{ p.stock }}</li>
+                                            </ul>                            
+                                        </div>
+                                        <h4 class="card-title pricing-card-title precio mt-3" >$ <span>{{ p.precio }}</span></h4>
+                                        <a href="" class="btn agregar-carrito mb-3" data-id="{{ p.id }}"><i class="fas fa-shopping-cart mr-2"></i>Comprar</a>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>  
+
+                <h4 id="Tablets" class="mt-5 seccion text-center">Tablets</h4>
+                <div class="row ">
+                    <div class="col columna d-flex flex-wrap">         
+                        {% for p in Productos %}                      
+                            {% if p.categoria.nombre == "Tablets" %}
+                            <div class="card mx-auto my-3 text-white" data-aos="fade-right">
+                                <div class="row contenido">
+                                    <div class="col-12 col-sm-5 d-flex align-items-center">
+                                        <div class="imgBx ">
+                                            {% if p.imagen %}
+                                            <img src="{{ p.imagen.url }}" class="card-img-top " alt="producto televisor" >
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-7">
+                                        <h2 class="card-title pt-4 mb-5 ">{{ p.nombre }}</h2>
+                                        <div class="card-body text-center">
+                                            <ul class="detalles ">
+                                                <li> {{ p.caracteristica_1 }}</li>                                        
+                                                <li> {{ p.caracteristica_2 }}</li>                                        
+                                                <li> {{ p.caracteristica_3 }}</li>                                        
+                                                <li> {{ p.caracteristica_4 }}</li>                                        
+                                                <li> {{ p.caracteristica_5 }}</li> 
+                                                <li>Stock: {{ p.stock }}</li>                                       
+                                            </ul>                            
+                                        </div>
+                                        <h4 class="card-title pricing-card-title precio mt-3" >$ <span>{{p.precio}}</span></h4>
+                                        <a href="" class="btn agregar-carrito mb-3" data-id="{{ p.id }}"><i class="fas fa-shopping-cart mr-2"></i>Comprar</a>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                        {% endfor %}  
+                        </div> 
+                </div>
+
+                <h4 id="Televisores" class="mt-5 seccion text-center">Televisores</h4>
+                <div class="row ">
+                    <div class="col columna d-flex flex-wrap">         
+                        {% for p in Productos %}                      
+                            {% if p.categoria.nombre == "Televisores" %}
+                            <div class="card mx-auto my-3 text-white" data-aos="fade-right">
+                                <div class="row contenido">
+                                    <div class="col-12 col-sm-5 d-flex align-items-center">
+                                        <div class="imgBx ">
+                                            {% if p.imagen %}
+                                            <img src="{{ p.imagen.url }}" class="card-img-top " alt="producto televisor" >
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-7">
+                                        <h2 class="card-title pt-4 mb-5 ">{{ p.nombre }}</h2>
+                                        <div class="card-body text-center">
+                                            <ul class="detalles ">
+                                                <li> {{ p.caracteristica_1}}</li>                                        
+                                                <li> {{ p.caracteristica_2}}</li>                                        
+                                                <li> {{ p.caracteristica_3}}</li>                                        
+                                                <li> {{ p.caracteristica_4}}</li>                                        
+                                                <li> {{ p.caracteristica_5}}</li>
+                                                <li>Stock: {{ p.stock }}</li>                                        
+                                            </ul>                            
+                                        </div>
+                                        <h4 class="card-title pricing-card-title precio mt-3" >$ <span>{{ p.precio }}</span></h4>
+                                        <a href="" class="btn agregar-carrito mb-3" data-id="{{ p.id }}"><i class="fas fa-shopping-cart mr-2"></i>Comprar</a>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                        {% endfor %}  
+                    </div>
+                </div>
+
+                <h4 id="Consolas" class="mt-5 seccion text-center">Consolas</h4>
+                <div class="row ">
+                    <div class="col columna d-flex flex-wrap">  
+                        {% for p in Productos %}                      
+                            {% if p.categoria.nombre == "Consolas" %}   
+                            <div class="card mx-auto my-3 text-white" data-aos="fade-right">
+                                <div class="row contenido">
+                                    <div class="col-12 col-sm-5 d-flex align-items-center">
+                                        <div class="imgBx ">
+                                            {% if p.imagen %}
+                                            <img src="{{ p.imagen.url }}" class="card-img-top " alt="producto consola" >
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-7">
+                                        <h2 class="card-title pt-4 mb-5 ">{{ p.nombre }}</h2>
+                                        <div class="card-body text-center">
+                                            <ul class="detalles ">
+                                                <li> {{ p.caracteristica_1 }} </li>  
+                                                <li> {{ p.caracteristica_2 }}</li>          
+                                                <li> {{ p.caracteristica_3 }}</li>   
+                                                <li> {{ p.caracteristica_4 }}</li>
+                                                <li> {{ p.caracteristica_5 }}</li> 
+                                                <li>Stock: {{ p.stock }}</li>                         
+                                            </ul>                            
+                                        </div>
+                                        <h4 class="card-title pricing-card-title precio mt-3" >$ <span>{{ p.precio }}</span></h4>
+                                        <a href="" class="btn agregar-carrito mb-3" data-id="{{ p.id }}"><i class="fas fa-shopping-cart mr-2"></i>Comprar</a>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                        {% endfor %}                       
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section >
+            <a href="#" class="btnCarrito" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-shopping-cart"></i>
+            </a>
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Carrito</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div id="carrito" >
+                                <table id="lista-carrito" class="table">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th>Imagen</th>
+                                            <th>Nombre</th>
+                                            <th>Precio</th>
+                                            <th>Eliminar</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                                <a href="#" id="vaciar-carrito" class="btn btn-danger btn-block mt-4"><i class="fas fa-trash-alt mr-2"></i>Vaciar Carrito</a>
+                                <a href="#" id="procesar-pedido" class="btn btn-success btn-block"><i class="fas fa-check mr-2"></i>Procesar Compra</a>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer  class="bg-primary-theme">
+            <div class="container">
+                <div class="row ">
+                    <div class="col">
+                        <p class="text-white text-center">Copyright (c) 2020 Copyright <a href="/">DaleTuCortech.cl</a> All Rights Reserved.</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>AOS.init();</script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script src="{% static 'js/slideryTable.js' %}"></script>
+    <script src="{% static 'js/sweetalert2.all.min.js' %}"></script>
+    <script src="{% static 'js/carrito.js' %}"></script> 
+    <script src="{% static 'js/pedido.js' %}"></script>
+</body>
+</html>

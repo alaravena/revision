@@ -1,0 +1,13 @@
+.card {
+    background:rgb(53, 15, 54);
+    color: #fff;
+}
+
+.card .btn {
+    background:rgb(86, 28, 88);
+    color: #fff;
+}
+
+.card .btn:hover {
+    background:#862f5f;
+}
